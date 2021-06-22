@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Pets{% endblock %}
+
+{% block content %}
+    <h1 class='display-2 text-center'>Pets:</h1>
+
+    <form action='/add' class='container'>
+        <div class="d-grid gap-2">
+            <button class='btn btn-lg btn-outline-success' type='submit' formaction='/add'>Add Pet</button>
+        </div>
+    </form>
+    
+    <div class="container">
+        <div class='row'>
+            {% for pet in pets %}
+                <div class='card mx-auto'>
+
+                    {% if pet.photo_url %}
+                        <img src="{{pet.photo_url}}" class='card-img-top'>
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class='card-title'>{{pet.name}}</h5>
+                        <p class='card-text'><b>Species: </b>{{pet.species}}</p>
+                        <p class='card-text'><b>Age: </b>{{pet.age}}</p>
+
+                        {% if pet.notes %}
+                            <p class='card-text'><b>Details: </b>{{pet.notes}}</p>
+                        {% endif %}
+
+                        {% if pet.available %}
+                            <p class='card-text text-success'><b>Available</b></p>
+                        {% endif %}
+
+                        <a href='/details/{{pet.id}}' class='btn btn-outline-primary'>Pet Details</a>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
